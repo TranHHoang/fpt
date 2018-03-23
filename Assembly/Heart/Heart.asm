@@ -11,15 +11,35 @@ banksel	PORTD
 clrf	PORTD
 
 Main
-	bsf		PORTC, 0
+	clrf	PORTD
+	clrf	PORTC
+	movlw 	B'01000010'
+	movwf	PORTD
+	movlw	B'11000111'
+	movwf   PORTC
+	; Next col
 	call 	Delay
-	bcf 	PORTC, 0
-	bsf 	PORTD, 0
+	clrf	PORTD
+	clrf	PORTC
+	movlw 	B'00100100'
+	movwf	PORTD
+	movlw	B'10111011'
+	movwf   PORTC
 	call 	Delay
-	bcf 	PORTD, 0
+	; Last col
+	clrf	PORTD
+	clrf	PORTC
+	movlw 	B'00011000'
+	movwf	PORTD
+	movlw	B'11011101'
+	movwf   PORTC
+	call 	Delay
+	
 	goto 	Main
+
 Delay
 	decfsz	20h
 	goto 	Delay
-	return
+	return	
+
 end
